@@ -8,6 +8,7 @@ import Home from './pages/Home.jsx'
 import Gun from './pages/Gun.jsx'
 import About from './pages/About.jsx'
 import Header from './components/header/Header.jsx'
+import Footer from './components/footer/Footer.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/gun/:id" element={<Gun />} />
           <Route path='/About' element={<About />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </Provider>
   </StrictMode>,
