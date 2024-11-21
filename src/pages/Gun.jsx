@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-export default function Home() {
+export default function Gun() {
 
   const { id } = useParams();
   const theme = useSelector((state) => state.theme.isLight);
