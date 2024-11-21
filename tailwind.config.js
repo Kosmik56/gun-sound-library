@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        'test': "rgb(245, 66, 179)"
+        'button': "#e6e6e6",
+        'button-dark': "#5c5c5c"
       },
       transitionProperty: {
         width: 'width',
