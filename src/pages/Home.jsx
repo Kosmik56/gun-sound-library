@@ -1,11 +1,21 @@
+import { useSelector } from "react-redux";
 import GunCard from "../components/home/GunCard.jsx"
 
-export default function Home(){
+export default function Home() {
 
-  return(
-    <>
-    <h1 className="bg-test py-10">Home Page</h1>
-    <GunCard/>
-    </>
-  ) 
+  const theme = useSelector((state) => state.theme.isLight);
+
+  if (!theme) {
+    document.body.style.backgroundColor = "black";
+    document.body.style.color = "white";
+  } else {
+    document.body.style.backgroundColor = "white";
+    document.body.style.color = "black";
+  }
+
+  return (
+    <main>
+      <GunCard />
+    </main>
+  )
 }
