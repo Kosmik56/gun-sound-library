@@ -1,5 +1,5 @@
 import { RiVolumeUpFill } from "react-icons/ri";
-
+import API from "../API";
 
 export default function GunCard(){
 
@@ -9,6 +9,7 @@ export default function GunCard(){
       <h3>HK 416 F</h3>
       <div>
       <RiVolumeUpFill />
+      <API />
       <div></div>
       </div>
       <input type="button" value="Voir plus" />
