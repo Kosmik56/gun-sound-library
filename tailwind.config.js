@@ -5,7 +5,10 @@ export default {
     extend: {
       colors: {
         'test': "rgb(245, 66, 179)"
-      }
+      },
+      transitionProperty: {
+        width: 'width',
+      },
     },
   },
   plugins: [],
