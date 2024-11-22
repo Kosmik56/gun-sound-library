@@ -48,6 +48,6 @@ export default function ImageLoader({ id }) {
   }, []);
 
   return (
-    <img src={image ? image : "/placeholder.png"} alt={id} />
+    <img className="w-full aspect-video object-center object-cover" src={image ? image : "/placeholder.png"} alt={id} />
   )
 }

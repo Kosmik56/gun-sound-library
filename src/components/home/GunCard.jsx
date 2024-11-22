@@ -2,13 +2,12 @@ import React, { useRef } from "react";
 import { RiVolumeUpFill } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import ImageLoader from "../ImageLoader";
 
-export default function GunCard() {
+export default function GunCard({ id }) {
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
   const theme = useSelector((state) => state.theme.isLight);
-
-  //path audio; title; id (link); image
 
   function playSound() {
     if (!audioRef.current) {
@@ -40,15 +39,11 @@ export default function GunCard() {
   }
 
   return (
-    <article className={"mt-10 ml-10 shadow-md rounded-[20px] w-fit overflow-hidden " + (theme ? "bg-gray-100" : "bg-white/60")}>
-      <img
-        className="w-[280px] aspect-video object-cover object-center"
-        src="placeholder.png"
-        alt="placeholder"
-      />
+    <article className={"mt-10 ml-10 w-[300px] shadow-md rounded-[20px] overflow-hidden " + (theme ? "bg-gray-100" : "bg-white/60")}>
+      <ImageLoader id={id} />
 
       <div className="p-2 flex flex-col justify-center items-center">
-        <h3 className="text-xl font-bold tracking-[1.2px] font-sans leading-tight">HK 416 F</h3>
+        <h3 className="text-xl font-bold tracking-[1.2px] font-sans leading-tight">{id}</h3>
 
         <div className="flex py-[7px] gap-[10px] w-full">
           <button onClick={playSound}>
@@ -63,7 +58,7 @@ export default function GunCard() {
           </div>
         </div>
 
-        <Link to="/"
+        <Link to={`/gun/${id}`}
           className={"flex items-center justify-center h-[40px] w-full rounded-[12px] text-[20px] tracking-[1px] cursor-pointer shadow " + (theme ? "bg-button" : "bg-button-dark")}
           type="button" value="Voir plus">
           Voir plus

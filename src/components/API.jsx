@@ -1,5 +1,7 @@
 import axios from "axios"
 import React, { useState, useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { pushGun } from "../redux/gunlistSlice"
 
 const FirearmsList = () => {
   const [firearms, setFirearms] = useState([])
@@ -8,8 +10,9 @@ const FirearmsList = () => {
   const [newEntry, setNewEntry] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  const dispatch = useDispatch()
 
-  
+
   useEffect(() => {
     const fetchFirearmsData = async () => {
       setLoading(true);
@@ -41,7 +44,7 @@ const FirearmsList = () => {
         setLoading(false)
       }
     }
-    
+
     fetchFirearmsData()
   }, [])
 
@@ -60,6 +63,7 @@ const FirearmsList = () => {
     if (existsInOriginal || existsInCustom) {
       if (!newFirearms.includes(cleanedEntry)) {
         setNewFirearms((preFirearms) => [...preFirearms, cleanedEntry])
+        dispatch(pushGun(cleanedEntry));
       }
     } else {
       setCustomFirearms((prevCustomFirearms) => [...prevCustomFirearms, cleanedEntry])
@@ -71,7 +75,7 @@ const FirearmsList = () => {
   return (
     <div style={{ padding: "20px" }}>
 
-      <div> 
+      <div>
         {loading && <p>Loading firearms data...</p>}
         {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
