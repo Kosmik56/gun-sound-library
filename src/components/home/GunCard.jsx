@@ -39,7 +39,7 @@ export default function GunCard({ id }) {
   }
 
   return (
-    <article className={"mt-10 ml-10 w-[300px] shadow-md rounded-[20px] w-fit overflow-hidden " + (theme ? "bg-gray-100" : "bg-white/60")}>
+    <article className={"mt-10 ml-10 w-[250px] shadow-md rounded-[20px] w-fit overflow-hidden " + (theme ? "bg-gray-100" : "bg-white/60")}>
       <ImageLoader id={id} />
 
       <div className="p-2 flex flex-col justify-center items-center">
