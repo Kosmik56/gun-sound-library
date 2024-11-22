@@ -26,6 +26,5 @@ createRoot(document.getElementById('root')).render(
         <Footer />
       </BrowserRouter>
     </Provider>
-    <API />
   </StrictMode>,
 )

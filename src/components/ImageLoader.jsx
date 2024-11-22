@@ -48,6 +48,6 @@ export default function ImageLoader({ id }) {
   }, []);
 
   return (
-    <img src={image ? image : "/placeholder.png"} alt={id} />
+    <img className="aspect-video" src={image ? image : "/placeholder.png"} alt={id} />
   )
 }

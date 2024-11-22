@@ -4,6 +4,7 @@ import GunCard from "../components/home/GunCard.jsx"
 export default function Home() {
 
   const theme = useSelector((state) => state.theme.isLight);
+  const guns = useSelector((state) => state.guns.list);
 
   if (!theme) {
     document.body.style.backgroundColor = "black";
@@ -13,9 +14,13 @@ export default function Home() {
     document.body.style.color = "black";
   }
 
+  console.log(guns);
+
   return (
     <main className="min-h-screen">
-      <GunCard />
+      <section className="flex flex-wrap">
+        {guns && guns.map(id => <GunCard key={id} id={id} />)}
+      </section>
     </main>
   )
 }
