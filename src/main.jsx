@@ -10,6 +10,7 @@ import About from './pages/About.jsx'
 import API from './components/API.jsx'
 import Header from './components/header/Header.jsx'
 import Footer from './components/footer/Footer.jsx'
+const baseUrl = "/gun-sound-library";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -18,10 +19,10 @@ createRoot(document.getElementById('root')).render(
         <API />
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/gun/:id" element={<Gun />} />
-          <Route path='/About' element={<About />} />
-          <Route path='/API' element={<API />} />
+          <Route path={baseUrl + "/"} element={<Home />} />
+          <Route path={baseUrl + "/gun/:id"} element={<Gun />} />
+          <Route path={baseUrl + '/About'} element={<About />} />
+          <Route path={baseUrl + '/API'} element={<API />} />
         </Routes>
         <Footer />
       </BrowserRouter>
