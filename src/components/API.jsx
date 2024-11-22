@@ -80,19 +80,6 @@ const FirearmsList = () => {
         {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
 
-      {newFirearms.length > 0 && (
-        <div style={{ marginTop: "20px" }}>
-          <h3>New Firearms</h3>
-          <ul>
-            {newFirearms.map((firearm, index) => (
-              <li key={`${index}`} style={{ color: "green" }}>
-                {firearm}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
       <div style={{ marginTop: "20px" }}>
         <h3>Add a New Firearm</h3>
         <input

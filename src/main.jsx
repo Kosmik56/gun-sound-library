@@ -16,8 +16,8 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <API />
         <Header />
+        <API />
         <Routes>
           <Route path={baseUrl + "/"} element={<Home />} />
           <Route path={baseUrl + "/gun/:id"} element={<Gun />} />
