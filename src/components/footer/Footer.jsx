@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className={"mt-[30px] border-t border-solid " + (theme ? "border-black/50" : "border-white/50")}>
       <p className="p-[20px]">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, adipisci.
+        Made with blood, sweat and tears by Maxence L and Lewis K. &copy;2024 
       </p>
     </footer>
   )
