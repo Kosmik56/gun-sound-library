@@ -8,6 +8,7 @@ export default function GunCard({ id }) {
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
   const theme = useSelector((state) => state.theme.isLight);
+  const baseUrl = "/gun-sound-library";
 
   function playSound() {
     if (!audioRef.current) {
@@ -58,7 +59,7 @@ export default function GunCard({ id }) {
           </div>
         </div>
 
-        <Link to={`/gun/${id}`}
+        <Link to={`${baseUrl}/gun/${id}`}
           className={"flex items-center justify-center h-[40px] w-full rounded-[12px] text-[20px] tracking-[1px] cursor-pointer shadow " + (theme ? "bg-button" : "bg-button-dark")}
           type="button" value="Voir plus">
           Voir plus
