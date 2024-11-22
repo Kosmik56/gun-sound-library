@@ -22,9 +22,11 @@ createRoot(document.getElementById('root')).render(
           <Route path="/" element={<Home />} />
           <Route path="/gun/:id" element={<Gun />} />
           <Route path='/About' element={<About />} />
+          <Route path='/API' element={<API />} />
         </Routes>
         <Footer />
       </BrowserRouter>
     </Provider>
+    <API />
   </StrictMode>,
 )

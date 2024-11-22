@@ -1,72 +1,112 @@
-import React, { useState } from "react";
+import axios from "axios"
+import React, { useState, useEffect } from "react"
 
-const API = () => {
-  const [query, setQuery] = useState("");
-  const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+const FirearmsList = () => {
+  const [firearms, setFirearms] = useState([])
+  const [customFirearms, setCustomFirearms] = useState([])
+  const [newFirearms, setNewFirearms] = useState([])
+  const [newEntry, setNewEntry] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
 
-  // Function to fetch articles
-  const fetchArticles = async (searchTerm) => {
-    setLoading(true);
-    setError("");
-    try {
-        const response = await fetch(
-            `https://en.wikipedia.org/w/api.php?action=query&format=json&generator=search&gsrsearch=gun&prop=pageimages|extracts&exintro&explaintext&piprop=thumbnail&pithumbsize=300&origin=*`
-          );
-      if (!response.ok) {
-        throw new Error("Failed to fetch data from API");
+  
+  useEffect(() => {
+    const fetchFirearmsData = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const response = await axios.get(`https://en.wikipedia.org/w/api.php`, {
+          params: {
+            action: 'parse',
+            page: 'List_of_firearms',
+            format: 'json',
+            origin: '*',
+          },
+        });
+
+        const data = response.data
+
+        const parser = new DOMParser()
+        const htmlDoc = parser.parseFromString(data.parse.text["*"], "text/html")
+
+        const firearmElements = htmlDoc.querySelectorAll("li")
+        const firearmsList = Array.from(firearmElements)
+          .map((li) => li.textContent.replace(/\([^()]*\)/g, "").trim())
+          .filter((name) => name.length > 0)
+
+        setFirearms(firearmsList);
+      } catch (err) {
+        setError(err.message || "Failed to fetch firearms data")
+      } finally {
+        setLoading(false)
       }
-      const data = await response.json();
-      setArticles(data.query.search);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
     }
-  };
+    
+    fetchFirearmsData()
+  }, [])
 
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (query.trim()) {
-      fetchArticles(query);
+  const handleNewEntry = () => {
+    const cleanedEntry = newEntry.trim()
+
+    if (!cleanedEntry) return
+
+    const existsInOriginal = firearms.some(
+      (firearm) => firearm.toLowerCase() === cleanedEntry.toLowerCase()
+    )
+    const existsInCustom = customFirearms.some(
+      (firearm) => firearm.toLowerCase() === cleanedEntry.toLowerCase()
+    )
+
+    if (existsInOriginal || existsInCustom) {
+      if (!newFirearms.includes(cleanedEntry)) {
+        setNewFirearms((preFirearms) => [...preFirearms, cleanedEntry])
+      }
+    } else {
+      setCustomFirearms((prevCustomFirearms) => [...prevCustomFirearms, cleanedEntry])
     }
-  };
+
+    setNewEntry("")
+  }
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>Wikimedia Article Search</h2>
-      <form onSubmit={handleSubmit}>
+
+      <div> 
+        {loading && <p>Loading firearms data...</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
+      </div>
+
+      {newFirearms.length > 0 && (
+        <div style={{ marginTop: "20px" }}>
+          <h3>New Firearms</h3>
+          <ul>
+            {newFirearms.map((firearm, index) => (
+              <li key={`${index}`} style={{ color: "green" }}>
+                {firearm}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div style={{ marginTop: "20px" }}>
+        <h3>Add a New Firearm</h3>
         <input
           type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search for articles"
-          style={{ padding: "10px", marginRight: "10px", width: "300px" }}
+          placeholder="Enter firearm name"
+          value={newEntry}
+          onChange={(e) => setNewEntry(e.target.value)}
+          style={{ padding: "10px", width: "300px" }}
         />
-        <button type="submit" style={{ padding: "10px 20px" }}>
-          Search
+        <button
+          onClick={handleNewEntry}
+          style={{ marginLeft: "10px", padding: "10px 20px" }}
+        >
+          Add Firearm
         </button>
-      </form>
-
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <ul>
-        {articles.map((article) => (
-          <li key={article.pageid}>
-            <a
-              href={`https://en.wikipedia.org/wiki/${article.title}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {article.title}
-            </a>
-          </li>
-        ))}
-      </ul>
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default API;
+export default FirearmsList
