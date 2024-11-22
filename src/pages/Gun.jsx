@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import ImageLoader from "../components/ImageLoader";
 
 export default function Gun() {
 
@@ -8,7 +9,6 @@ export default function Gun() {
   const data = {
     title: id,
     description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi deserunt, libero aperiam ex architecto cumque modi blanditiis accusantium excepturi veniam. Repellat, perferendis ab. Porro quidem vel repellat doloribus praesentium eligendi incidunt commodi non. Natus facere ullam nostrum vel unde dolor odit quam explicabo exercitationem ducimus magnam eligendi tenetur, id dicta!",
-    imageSrc: "/placeholder.png",
     audioSrc: "/placeholder.mp3"
   }
 
@@ -28,11 +28,7 @@ export default function Gun() {
         <p>{data.description}</p>
       </section>
       <section className="flex flex-col gap-[30px]">
-        <img
-          className="w-[350px] bg-gray-100 aspect-video object-cover object-center"
-          src={data.imageSrc}
-          alt=""
-        />
+        <ImageLoader id={id} />
         <audio controls>
           <source src={data.audioSrc} type="audio/mpeg" />
         </audio>

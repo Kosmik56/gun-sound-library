@@ -15,7 +15,6 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <Navbar />
         <API />
         <Header />
         <Routes>
