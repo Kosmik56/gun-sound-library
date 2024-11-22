@@ -16,7 +16,7 @@ export default function About() {
   const paragraph_style = "my-[30px] text-[20px] tracking-wide text-pretty";
 
   return (
-    <main className="px-[40px] my-[40px]">
+    <main className="min-h-screen px-[40px] my-[40px]">
       <h2 className={header_style}>👉 Qui sommes-nous ?</h2>
       <p className={paragraph_style}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo quod dolores illum odio rerum est sint harum dignissimos dolorem maxime unde, quibusdam porro tenetur eveniet cum aspernatur commodi iusto neque corrupti corporis eius officiis. Reprehenderit soluta iure doloribus natus eaque maxime? Itaque praesentium similique laudantium.</p>
       <h2 className={header_style}>😎 Notre mission</h2>
