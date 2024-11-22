@@ -35,7 +35,7 @@ const FirearmsList = () => {
         const firearmElements = htmlDoc.querySelectorAll("li")
         const firearmsList = Array.from(firearmElements)
           .map((li) => li.textContent.replace(/\([^()]*\)/g, "").trim())
-          .filter((name) => name.length > 0)
+          .filter((name) => name.length > 1)
 
         setFirearms(firearmsList);
       } catch (err) {
